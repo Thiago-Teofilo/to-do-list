@@ -6,21 +6,21 @@ import Logo from '../assets/Logo.svg'
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 interface IHeaderProps {
-    handleAddToDo?: (description: string) => void
+    handleAddTask?: (description: string) => void
 }
 
-export function Header({ handleAddToDo = () => {} }: IHeaderProps) {
-    const [newToDoDescription, setNewToDoDescription] = useState('')
+export function Header({ handleAddTask = () => {} }: IHeaderProps) {
+    const [newTaskDescription, setNewTaskDescription] = useState('')
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        handleAddToDo(newToDoDescription)
-        setNewToDoDescription("")
+        handleAddTask(newTaskDescription)
+        setNewTaskDescription("")
     }
 
-    function handleNewToDoDescriptionChange(event: ChangeEvent<HTMLInputElement>) {
-        setNewToDoDescription(event.target.value)
+    function handleNewTaskDescriptionChange(event: ChangeEvent<HTMLInputElement>) {
+        setNewTaskDescription(event.target.value)
     }
 
     return (
@@ -33,8 +33,8 @@ export function Header({ handleAddToDo = () => {} }: IHeaderProps) {
                         type="text" 
                         name="newTask" 
                         id="newTask"
-                        value={newToDoDescription}
-                        onChange={handleNewToDoDescriptionChange} 
+                        value={newTaskDescription}
+                        onChange={handleNewTaskDescriptionChange} 
                         required
                     />
                     <button type="submit">Criar <IoMdAddCircleOutline /></button>

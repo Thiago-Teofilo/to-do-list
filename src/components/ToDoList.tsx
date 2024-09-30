@@ -8,13 +8,13 @@ import ClipBoard from '../assets/Clipboard.svg'
 
 interface IToDoListProps {
     toDoList:  IToDo[];
-    handleConcludeToDo?: (id: number) => void;
-    handleDeleteToDo?: (id: number) => void;
+    handleConcludeTask?: (id: number) => void;
+    handleDeleteTask?: (id: number) => void;
 }
 
-export function ToDoList({ toDoList, handleConcludeToDo = () => {}, handleDeleteToDo = () => {} }: IToDoListProps) {
+export function ToDoList({ toDoList, handleConcludeTask = () => {}, handleDeleteTask = () => {} }: IToDoListProps) {
 
-    const totalTodo = toDoList.length
+    const totalTask = toDoList.length
     const totalCompleted = toDoList.filter(item => item.isCompleted).length
 
     return (
@@ -24,7 +24,7 @@ export function ToDoList({ toDoList, handleConcludeToDo = () => {}, handleDelete
                     <h2>
                         Tarefas criadas
                     </h2>
-                    <span>{totalTodo}</span>
+                    <span>{totalTask}</span>
                 </div>
                 <div className={styles['status-label']}>
                     <h2>
@@ -34,16 +34,16 @@ export function ToDoList({ toDoList, handleConcludeToDo = () => {}, handleDelete
                 </div>
             </div>
             {
-                totalTodo > 0 ? (
+                totalTask > 0 ? (
                     <ul>
                     {
                         toDoList.map(item => (
                             <li key={item.id} className={item.isCompleted ? styles.completed : ''}>
-                                <div className={styles.checkbox} onClick={() => handleConcludeToDo(item.id)}>
+                                <div className={styles.checkbox} onClick={() => handleConcludeTask(item.id)}>
                                     { item.isCompleted ? <FaCheck /> : null }
                                 </div>
                                 <p>{item.description}</p>
-                                <button className={styles.deleteButton} onClick={() => handleDeleteToDo(item.id)}>
+                                <button className={styles.deleteButton} onClick={() => handleDeleteTask(item.id)}>
                                     <LuTrash2 />
                                 </button>
                             </li>

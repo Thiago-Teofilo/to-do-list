@@ -93,6 +93,7 @@
 }
 
 .to-do-list ul li p {
+    align-self: star;
     font-size: 0.87rem;
 }
 

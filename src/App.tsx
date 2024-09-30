@@ -17,7 +17,7 @@ function App() {
       localStorage.setItem('toDoList', JSON.stringify(toDoList));
   }, [toDoList]);
 
-  function handleAddToDo(description: string) {
+  function handleAddTask(description: string) {
     setToDoList((state) => [...state, {
       id: state.length,
       description,
@@ -25,13 +25,13 @@ function App() {
     }])
   }
 
-  function handleConcludeToDo(id: number) {
-      const updatedTodoList = toDoList.map(todo => {
-          if (todo.id === id) {
-              todo.isCompleted = !todo.isCompleted
+  function handleConcludeTask(id: number) {
+      const updatedTodoList = toDoList.map(task => {
+          if (task.id === id) {
+              task.isCompleted = !task.isCompleted
           }
 
-          return todo
+          return task
       })
 
       setToDoList(updatedTodoList)
@@ -43,9 +43,9 @@ function App() {
 
   return (
     <div>
-      <Header handleAddToDo={handleAddToDo} />
+      <Header handleAddTask={handleAddTask} />
       <div className='content'>
-        <ToDoList toDoList={toDoList} handleConcludeToDo={handleConcludeToDo} handleDeleteToDo={handleDeleteToDo} />
+        <ToDoList toDoList={toDoList} handleConcludeTask={handleConcludeTask} handleDeleteTask={handleDeleteToDo} />
       </div>
     </div>
   )
