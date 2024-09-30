@@ -1,0 +1,82 @@
+.header {
+    height: 8rem;
+    padding-top: 4.5rem;
+
+    background-color: var(--gray-700);
+}
+
+.header .content {
+    display: block;
+    width: 736px;
+
+    margin: auto;
+}
+
+.logo {
+    display: block;
+    
+    width: 7.875rem;
+    height: 3.5rem;
+
+    margin: auto;
+}
+
+.header form {
+    display: flex;
+    gap: 0.5rem;
+    position: relative;
+
+    margin: auto;
+    top: 3rem;
+}
+
+.header form input, .header form button {
+    border-radius: 0.5rem;
+
+    color: var(--gray-100);
+}
+
+.header form input {
+    padding: 1rem;
+    flex-grow: 1;
+    font-size: 1rem;
+    border: solid var(--gray-700) 1px;
+
+    background-color: var(--gray-500);
+}
+
+.header form input::placeholder {
+    color: var(--gray-300);
+}
+
+.header form button {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    border: none;
+
+    background-color: var(--blue-dark);
+
+    cursor: pointer;
+
+    transition: background-color 0.2s
+}
+
+.header form button:hover {
+    background-color: var(--blue);
+}
+
+.header form button svg {
+    height: 1rem;
+    width: 1rem;
+}
+
+
+@media (max-width: 768px) {
+    .header .content {
+        width: calc(100% - 2rem);
+    }
+}
