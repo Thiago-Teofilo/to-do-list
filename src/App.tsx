@@ -1,32 +1,33 @@
 import { useEffect, useState } from 'react'
-import { IToDo } from './api/models/to-do'
+import { ITodo } from './api/models/todo'
 import './App.css'
 import { Header } from './components/Header'
-import { ToDoList } from './components/ToDoList'
-import { getToDoListSaved } from './utils/localStorage'
+import { TodoList } from './components/TodoList'
+import { getTodoListSaved } from './utils/localStorage'
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
 
-  const [toDoList, setToDoList] = useState<IToDo[]>(getToDoListSaved())
+  const [todoList, setTodoList] = useState<ITodo[]>(getTodoListSaved())
 
   useEffect(() => {
-      setToDoList(getToDoListSaved());
+      setTodoList(getTodoListSaved());
   }, []);
 
   useEffect(() => {
-      localStorage.setItem('toDoList', JSON.stringify(toDoList));
-  }, [toDoList]);
+      localStorage.setItem('todoList', JSON.stringify(todoList));
+  }, [todoList]);
 
   function handleAddTask(description: string) {
-    setToDoList((state) => [...state, {
-      id: state.length,
+    setTodoList((state) => [...state, {
+      id: uuidv4(),
       description,
       isCompleted: false
     }])
   }
 
-  function handleConcludeTask(id: number) {
-      const updatedTodoList = toDoList.map(task => {
+  function handleConcludeTask(id: string) {
+      const updatedTodoList = todoList.map(task => {
           if (task.id === id) {
               task.isCompleted = !task.isCompleted
           }
@@ -34,18 +35,18 @@ function App() {
           return task
       })
 
-      setToDoList(updatedTodoList)
+      setTodoList(updatedTodoList)
   }
 
-  function handleDeleteToDo(id: number) {
-      setToDoList(toDoList.filter(todo => todo.id !== id))
+  function handleDeleteToDo(id: string) {
+      setTodoList(todoList.filter(todo => todo.id !== id))
   }
 
   return (
     <div>
       <Header handleAddTask={handleAddTask} />
       <div className='content'>
-        <ToDoList toDoList={toDoList} handleConcludeTask={handleConcludeTask} handleDeleteTask={handleDeleteToDo} />
+        <TodoList todoList={todoList} handleConcludeTask={handleConcludeTask} handleDeleteTask={handleDeleteToDo} />
       </div>
     </div>
   )

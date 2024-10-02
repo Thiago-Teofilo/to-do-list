@@ -1,7 +1,7 @@
-export function getToDoListSaved() {
-    const savedToDoList = localStorage.getItem('toDoList');
-    if (savedToDoList) {
-        return JSON.parse(savedToDoList)
+export function getTodoListSaved() {
+    const savedTodoList = localStorage.getItem('todoList');
+    if (savedTodoList) {
+        return JSON.parse(savedTodoList)
     }
     return []
 }

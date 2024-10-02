@@ -1,21 +1,21 @@
-import styles from './ToDoList.module.css'
+import styles from './TodoList.module.css'
 
 import { FaCheck } from 'react-icons/fa'
 import { LuTrash2 } from 'react-icons/lu'
 
-import { IToDo } from '../api/models/to-do'
+import { ITodo } from '../api/models/todo'
 import ClipBoard from '../assets/Clipboard.svg'
 
-interface IToDoListProps {
-    toDoList:  IToDo[];
-    handleConcludeTask?: (id: number) => void;
-    handleDeleteTask?: (id: number) => void;
+interface ITodoListProps {
+    todoList:  ITodo[];
+    handleConcludeTask?: (id: string) => void;
+    handleDeleteTask?: (id: string) => void;
 }
 
-export function ToDoList({ toDoList, handleConcludeTask = () => {}, handleDeleteTask = () => {} }: IToDoListProps) {
+export function TodoList({ todoList, handleConcludeTask = () => {}, handleDeleteTask = () => {} }: ITodoListProps) {
 
-    const totalTask = toDoList.length
-    const totalCompleted = toDoList.filter(item => item.isCompleted).length
+    const totalTask = todoList.length
+    const totalCompleted = todoList.filter(item => item.isCompleted).length
 
     return (
         <div className={styles['to-do-list']}>
@@ -37,13 +37,13 @@ export function ToDoList({ toDoList, handleConcludeTask = () => {}, handleDelete
                 totalTask > 0 ? (
                     <ul>
                     {
-                        toDoList.map(item => (
-                            <li key={item.id} className={item.isCompleted ? styles.completed : ''}>
-                                <div className={styles.checkbox} onClick={() => handleConcludeTask(item.id)}>
-                                    { item.isCompleted ? <FaCheck /> : null }
+                        todoList.map(task => (
+                            <li key={task.id} className={task.isCompleted ? styles.completed : ''}>
+                                <div className={styles.checkbox} onClick={() => handleConcludeTask(task.id)}>
+                                    { task.isCompleted ? <FaCheck /> : null }
                                 </div>
-                                <p>{item.description}</p>
-                                <button className={styles.deleteButton} onClick={() => handleDeleteTask(item.id)}>
+                                <p>{task.description}</p>
+                                <button className={styles.deleteButton} onClick={() => handleDeleteTask(task.id)}>
                                     <LuTrash2 />
                                 </button>
                             </li>

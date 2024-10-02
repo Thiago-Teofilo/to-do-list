@@ -1,5 +1,5 @@
-export interface IToDo {
-    id: number;
+export interface ITodo {
+    id: string;
     description: string
     isCompleted: boolean
 }
